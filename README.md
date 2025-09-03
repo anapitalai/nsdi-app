@@ -377,3 +377,60 @@ copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall
+
+
+Flow Diagram
+Prostore@5.2.2 Flowchart (Textual Overview)
+Entry Point
+
+User lands on the main page (page.tsx).
+Layouts (layout.tsx, layout.tsx) wrap all pages.
+Authentication
+
+Sign In (page.tsx)
+Sign Up (page.tsx)
+Auth logic in auth.ts, auth.config.ts
+Middleware (middleware.ts) protects routes.
+User Flow
+
+Profile, Orders, Cart, etc. (user, cart, order)
+Checkout: Cart → Shipping Address → Payment Method → Place Order
+Admin Flow
+
+Admin Dashboard (page.tsx)
+Manage Products (products)
+Manage Orders (orders)
+Manage Users (users)
+API & Backend
+
+API routes (api)
+Database logic (db, prisma)
+Actions (actions)
+Components
+
+UI components (ui)
+Shared components (shared)
+Admin components (admin)
+
+## Application Flowchart
+
+```mermaid
+flowchart TD
+    A[Entry: Main Page] --> B[Auth: Sign In/Up]
+    B --> C[User: Profile/Orders/Cart]
+    C --> D[Checkout Flow]
+    D --> E[Shipping Address]
+    E --> F[Payment Method]
+    F --> G[Place Order]
+    B --> H[Admin: Dashboard]
+    H --> I[Manage Products]
+    H --> J[Manage Orders]
+    H --> K[Manage Users]
+    A --> L[API Routes]
+    L --> M[DB/Prisma]
+    L --> N[Actions]
+    A --> O[UI Components]
+    A --> P[Shared Components]
+    H --> Q[Admin Components]
+
+    ![Alt text](documentation_iamges/mermaid.jpg)
