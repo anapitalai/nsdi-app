@@ -43,7 +43,6 @@ This project is from my **Next.js Ecommerce course**
 - [License](#license)
 <!--toc:end-->
 
-## Features
 
 - Next Auth authentication
 - Admin area with stats & chart using Recharts
@@ -86,7 +85,6 @@ Sign up for a free PostgreSQL database through Vercel. Log into Vercel and click
 **Example:**
 
 ```
-DATABASE_URL="postgresql://username:password@host:port/dbname"
 ```
 
 #### Next Auth Secret
@@ -414,6 +412,7 @@ Admin components (admin)
 
 ## Application Flowchart
 
+
 ```mermaid
 flowchart TD
     A[Entry: Main Page] --> B[Auth: Sign In/Up]
@@ -433,4 +432,30 @@ flowchart TD
     A --> P[Shared Components]
     H --> Q[Admin Components]
 
-![Alt text](/documentation_images/mermaid.jpg)
+```
+
+## Display products flow
+
+### Data is brought from db folder to be displayed
+/app/(root)/page.tsx(Home Page)
+
+## Now to display the products in page.tsx, we create a component called product-list.tsx
+/components/shared/product/product-list.tsx
+
+page.tsx--------------->product-list.tsx------------------>product-card.tsx
+
+## route grouping
+/app/(root)
+    /(auth)
+    /auth
+    /admin
+    /api
+    /user
+    /unauthorised
+## Getting data from the database
+Server actions are asynchronous functions that are executed on the server
+/lib/actions
+
+## Use of Typescript for type checking
+ZOD is used for type checking,
+/lib/validators.ts

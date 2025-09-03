@@ -143,3 +143,19 @@ model Review {
   product            Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
+model Psm {
+  id                       String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  location_name            String
+  eastings                 Float
+  northings                Float
+  eastings_error           Float
+  northings_error          Float
+  ellipsoidal_height       Float
+  ellipsoidal_height_error Float
+  n_value                  Float
+  mean_sea_level           Float
+  lat                      Float
+  lon                      Float
+  createdAt                DateTime @default(now()) @db.Timestamp(6)
+}
