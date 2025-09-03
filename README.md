@@ -433,4 +433,4 @@ flowchart TD
     A --> P[Shared Components]
     H --> Q[Admin Components]
 
-    ![Alt text](documentation_images/mermaid.jpg)
+    ![Alt text](/documentation_images/mermaid.jpg)
