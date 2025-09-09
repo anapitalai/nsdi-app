@@ -459,3 +459,109 @@ Server actions are asynchronous functions that are executed on the server
 ## Use of Typescript for type checking
 ZOD is used for type checking,
 /lib/validators.ts
+
+
+## Project Structure & Flow
+
+Below is an overview of how the main parts of the project are interconnected, including key folders and files:
+
+---
+
+### 1. **App Entry & Layout**
+- **File:** `/app/(root)/layout.tsx`  
+  Wraps all pages with `<Header />`, `<Footer />`, and a main content area.
+
+- **File:** `/app/(root)/page.tsx`  
+  Main landing page. Example:
+  ```tsx
+  import ProductList from '@/components/shared/product/product-list';
+  import {
+    getLatestProducts,
+    getFeaturedProducts,
+  } from '@/lib/actions/product.actions';
+  import ProductCarousel from '@/components/shared/product/product-carousel';
+  import ViewAllProductsButton from '@/components/view-all-products-button';
+  import IconBoxes from '@/components/icon-boxes';
+  import DealCountdown from '@/components/deal-countdown';
+
+  const Homepage = async () => {
+    const latestProducts = await getLatestProducts();
+    const featuredProducts = await getFeaturedProducts();
+
+    return (
+      <>
+        {featuredProducts.length > 0 && (
+          <ProductCarousel data={featuredProducts} />
+        )}
+        <ProductList data={latestProducts} title='Newest Arrivals' limit={4} />
+        <ViewAllProductsButton />
+        <DealCountdown />
+        <IconBoxes />
+      </>
+    );
+  };
+
+  export default Homepage;
+  ```
+
+---
+
+### 2. **Navigation & Header**
+- **Folder:** `/components/shared/header/`
+  - `header.tsx`: Main header component.
+  - `category-drawer.tsx`: Drawer for category navigation, includes link to `/map`.
+
+---
+
+### 3. **Footer**
+- **File:** `/components/footer.tsx`  
+  Displays site footer.
+
+---
+
+### 4. **Pages & Routing**
+- **Folder:** `/app/(root)/`
+  - Main pages (e.g., `page.tsx`, `layout.tsx`, `map/page.tsx`).
+- **Folder:** `/app/(auth)/`
+  - Authentication pages.
+- **Folder:** `/app/admin/`
+  - Admin dashboard and management pages.
+- **Folder:** `/app/api/`
+  - API routes (e.g., `/api/landmarks/route.ts` for geospatial data).
+
+---
+
+### 5. **Geospatial Map Integration**
+- **File:** `/app/(root)/map/page.tsx`  
+  Displays the map with geospatial data.
+- **File:** `/components/shared/LandMarkMap.tsx`  
+  React component for rendering the map and markers.
+
+---
+
+### 6. **Database & Seeding**
+- **File:** `/prisma/schema.prisma`  
+  Prisma schema defining models (e.g., `LandMark`).
+- **File:** `/db/seed_landmark.ts`  
+  Seeder script for populating the `LandMark` table.
+
+---
+
+### 7. **Static & Public Assets**
+- **Folder:** `/public/`  
+  Static files, images, and spatial data uploads.
+
+---
+
+## **Example Flow: Displaying LandMark Data on Map**
+
+1. User navigates via `/components/shared/header/category-drawer.tsx` to `/map`.
+2. `/app/(root)/map/page.tsx` loads and renders `<LandMarkMap />`.
+3. `<LandMarkMap />` fetches data from `/app/api/landmarks/route.ts`.
+4. Data is retrieved from the database (`LandMark` model in `/prisma/schema.prisma`).
+5. Markers are displayed on the map
+
+
+
+1. Loading data from the database
+  1. typescripting created ===>Create actions===>use in page.tsx

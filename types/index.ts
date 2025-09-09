@@ -1,3 +1,19 @@
+export type LandMark = {
+  id: string;
+  location_name: string;
+  eastings: number;
+  northings: number;
+  eastings_error: number;
+  northings_error: number;
+  ellipsoidal_height: number;
+  ellipsoidal_height_error: number;
+  n_value: number;
+  mean_sea_level: number;
+  lat: number;
+  lon: number;
+  psm_type: string;
+  createdAt: string;
+};
 import { z } from 'zod';
 import {
   insertProductSchema,

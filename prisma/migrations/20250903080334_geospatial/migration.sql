@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "Psm" (
+CREATE TABLE "LandMark" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "location_name" TEXT NOT NULL,
     "eastings" DOUBLE PRECISION NOT NULL,
@@ -12,7 +12,8 @@ CREATE TABLE "Psm" (
     "mean_sea_level" DOUBLE PRECISION NOT NULL,
     "lat" DOUBLE PRECISION NOT NULL,
     "lon" DOUBLE PRECISION NOT NULL,
+    "psm_type" TEXT NOT NULL,
     "createdAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "Psm_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "LandMark_pkey" PRIMARY KEY ("id")
 );

@@ -40,14 +40,14 @@ model User {
   createdAt     DateTime  @default(now()) @db.Timestamp(6)
   updatedAt     DateTime  @updatedAt
   account       Account[]
-  session       Session[]
   Cart          Cart[]
   Order         Order[]
   Review        Review[]
+  session       Session[]
 }
 
 model Account {
-  userId            String  @db.Uuid
+  userId            String   @db.Uuid
   type              String
   provider          String
   providerAccountId String
@@ -58,11 +58,9 @@ model Account {
   scope             String?
   id_token          String?
   session_state     String?
-
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt         DateTime @default(now()) @db.Timestamp(6)
+  updatedAt         DateTime @updatedAt
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([provider, providerAccountId])
 }
@@ -71,10 +69,9 @@ model Session {
   sessionToken String   @id
   userId       String   @db.Uuid
   expires      DateTime @db.Timestamp(6)
+  createdAt    DateTime @default(now()) @db.Timestamp(6)
+  updatedAt    DateTime @updatedAt
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @updatedAt
 }
 
 model VerificationToken {
@@ -144,7 +141,7 @@ model Review {
   user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Psm {
+model LandMark {
   id                       String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   location_name            String
   eastings                 Float
@@ -157,5 +154,6 @@ model Psm {
   mean_sea_level           Float
   lat                      Float
   lon                      Float
+  psm_type                 String
   createdAt                DateTime @default(now()) @db.Timestamp(6)
 }

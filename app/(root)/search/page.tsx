@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+
 import ProductCard from '@/components/shared/product/product-card';
 import { Button } from '@/components/ui/button';
 import {

@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+
 import ProductList from '@/components/shared/product/product-list';
 import {
   getLatestProducts,

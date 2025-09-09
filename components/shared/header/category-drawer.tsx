@@ -11,6 +11,7 @@ import { getAllCategories } from '@/lib/actions/product.actions';
 import { MenuIcon } from 'lucide-react';
 import Link from 'next/link';
 
+
 const CategoryDrawer = async () => {
   const categories = await getAllCategories();
 
@@ -37,8 +38,21 @@ const CategoryDrawer = async () => {
                     {x.category} ({x._count})
                   </Link>
                 </DrawerClose>
+
               </Button>
             ))}
+          </div>
+          <div className='space-y-1 mt-8 border-t pt-4'>
+            <Button variant='ghost' className='w-full justify-start' asChild>
+              <DrawerClose asChild>
+                <Link href="/map">🗺️ Geospatial Map</Link>
+              </DrawerClose>
+            </Button>
+            <Button variant='ghost' className='w-full justify-start' asChild>
+              <DrawerClose asChild>
+                <Link href="/minio">🗂️ MinIO Files</Link>
+              </DrawerClose>
+            </Button>
           </div>
         </DrawerHeader>
       </DrawerContent>
