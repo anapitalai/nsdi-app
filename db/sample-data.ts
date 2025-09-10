@@ -117,6 +117,41 @@ const sampleData = {
       banner: null,
     },
   ],
+  landmarks: [
+    {
+      id: '1',
+      location_name: 'Port Moresby',
+      eastings: 400000,
+      northings: 9000000,
+      eastings_error: 0.5,
+      northings_error: 0.5,
+      ellipsoidal_height: 50.2,
+      ellipsoidal_height_error: 0.3,
+      n_value: 1.2,
+      mean_sea_level: 48.7,
+      lat: -9.478,
+      lon: 147.15,
+      psm_type: 'urban',
+      createdAt: new Date().toISOString(),
+    },
+    {
+      id: '2',
+      location_name: 'Lae',
+      eastings: 420000,
+      northings: 9020000,
+      eastings_error: 0.4,
+      northings_error: 0.4,
+      ellipsoidal_height: 60.1,
+      ellipsoidal_height_error: 0.2,
+      n_value: 1.1,
+      mean_sea_level: 59.9,
+      lat: -6.722,
+      lon: 146.984,
+      psm_type: 'urban',
+      createdAt: new Date().toISOString(),
+    },
+    // Add more sample landmarks as needed
+  ],
 };
 
 export default sampleData;

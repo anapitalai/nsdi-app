@@ -1,4 +1,5 @@
 import { prisma } from '@/db/prisma';
+import { SessionProvider } from "next-auth/react";
 
 // --- DB Connection Troubleshooting ---
 (async () => {
@@ -22,17 +23,28 @@ import Header from '@/components/shared/header';
 import Footer from '@/components/footer';
 import SideDrawer from '@/components/shared/side-drawer';
 
+import { usePathname } from 'next/navigation';
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
+  // If on the satellite map page, render only the map (no header/footer/wrapper)
+  const isMapPage = pathname === '/satellite-map';
   return (
-    <div className='flex h-screen flex-col'>
-      <SideDrawer />
-      <Header />
-      <main className='flex-1 wrapper'>{children}</main>
-      <Footer />
-    </div>
+    <SessionProvider>
+      {isMapPage ? (
+        <>{children}</>
+      ) : (
+        <div className='flex h-screen flex-col'>
+          <SideDrawer />
+          <Header />
+          <main className='flex-1 wrapper'>{children}</main>
+          <Footer />
+        </div>
+      )}
+    </SessionProvider>
   );
 }

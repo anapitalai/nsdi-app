@@ -170,3 +170,132 @@ const MapLandingPage = () => {
 export default MapLandingPage;
                                         
 
+
+
+
+// 'use client';
+// import dynamic from 'next/dynamic';
+// import { useState, useEffect, useCallback } from 'react';
+// import type { LandMark } from '@/types';
+// import Image from 'next/image';
+// import { useRouter } from 'next/navigation';
+// import { useSession } from 'next-auth/react';
+
+// const MapGL = dynamic(() => import('react-map-gl/mapbox').then(mod => mod.default), { ssr: false });
+// const Marker = dynamic(() => import('react-map-gl/mapbox').then(mod => mod.Marker), { ssr: false });
+
+// const SATELLITE_STYLE = 'mapbox://styles/mapbox/satellite-v9';
+// const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
+// const PIN_SVG = '/assets/pin.svg';
+// const INITIAL_VIEW_STATE = {
+//   longitude: 143.9555,
+//   latitude: -6.314993,
+//   zoom: 10,
+// };
+
+// export default function SatelliteMapPage() {
+//   const [landmarks, setLandmarks] = useState<LandMark[]>([]);
+//   const [zoom, setZoom] = useState(INITIAL_VIEW_STATE.zoom);
+//   const [polygonCoords, setPolygonCoords] = useState<{ lon: number; lat: number }[]>([]);
+//   const [area, setArea] = useState<number | null>(null);
+//   const [mapLoaded, setMapLoaded] = useState(false);
+//   const router = useRouter();
+//   const { data: session, status } = useSession();
+
+//   useEffect(() => {
+//     (async () => {
+//       try {
+//         const res = await fetch('/api/landmarks');
+//         if (!res.ok) throw new Error('Failed to fetch landmarks');
+//         const data = await res.json();
+//         setLandmarks(data);
+//       } catch (e) {
+//         // eslint-disable-next-line no-console
+//         console.error('Failed to fetch landmarks', e);
+//       }
+//     })();
+//   }, []);
+
+//   // Handle map click to add coordinates
+//   const handleMapClick = useCallback((event: any) => {
+//     const { lngLat } = event;
+//     setPolygonCoords((prev) => [...prev, { lon: lngLat.lng, lat: lngLat.lat }]);
+//   }, []);
+
+//   // Calculate area using the Shoelace formula (for simple polygons)
+//   const calculateArea = () => {
+//     if (polygonCoords.length < 3) {
+//       setArea(null);
+//       return;
+//     }
+//     // Convert lat/lon to planar coordinates (approximate, for small areas)
+//     const R = 6371000; // Earth radius in meters
+//     const coords = polygonCoords.map(({ lon, lat }) => {
+//       const x = R * lon * Math.PI / 180 * Math.cos((polygonCoords[0].lat * Math.PI) / 180);
+//       const y = R * lat * Math.PI / 180;
+//       return { x, y };
+//     });
+//     let sum = 0;
+//     for (let i = 0; i < coords.length; i++) {
+//       const { x: x1, y: y1 } = coords[i];
+//       const { x: x2, y: y2 } = coords[(i + 1) % coords.length];
+//       sum += x1 * y2 - x2 * y1;
+//     }
+//     setArea(Math.abs(sum / 2));
+//   };
+
+//   const handleAddMark = () => {
+//     router.push('/auth/sign-in?callbackUrl=/admin/landmarks/create');
+//   };
+
+//   return (
+//     <div className="w-screen h-screen absolute inset-0 z-0">
+//       <MapGL
+//         initialViewState={INITIAL_VIEW_STATE}
+//         mapStyle={SATELLITE_STYLE}
+//         mapboxAccessToken={MAPBOX_TOKEN}
+//         style={{ width: '100vw', height: '100vh' }}
+//         onMove={evt => setZoom(evt.viewState.zoom)}
+//         onClick={handleMapClick}
+//         onLoad={() => setMapLoaded(true)}
+//       >
+//         {mapLoaded && zoom >= 6 && landmarks.map(lm => (
+//           <Marker key={lm.id} longitude={lm.lon} latitude={lm.lat} anchor="bottom">
+//             <Image src={PIN_SVG} alt={lm.location_name} width={32} height={32} />
+//           </Marker>
+//         ))}
+//         {/* Draw polygon points as pin markers */}
+//         {mapLoaded && polygonCoords.map((pt, idx) => (
+//           <Marker key={`polypt-${idx}`} longitude={pt.lon} latitude={pt.lat} anchor="bottom">
+//             <Image src={PIN_SVG} alt={`Polygon Point ${idx + 1}`} width={32} height={32} />
+//           </Marker>
+//         ))}
+//         {/* Floating Add Mark Button */}
+//         <button
+//           onClick={handleAddMark}
+//           className="fixed bottom-8 right-8 z-50 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg w-16 h-16 flex items-center justify-center text-3xl border-4 border-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+//           title="Add New Mark"
+//         >
+//           +
+//         </button>
+//         {/* Floating Area Calculation Button */}
+//         <button
+//           onClick={calculateArea}
+//           className="fixed bottom-28 right-8 z-50 bg-green-600 hover:bg-green-700 text-white rounded-full shadow-lg w-16 h-16 flex items-center justify-center text-2xl border-4 border-white focus:outline-none focus:ring-2 focus:ring-green-400"
+//           title="Calculate Area from Coordinates"
+//         >
+//           &#x25A1;
+//         </button>
+//         {/* Show area result */}
+//         {area !== null && (
+//           <div className="fixed bottom-44 right-8 z-50 bg-white text-gray-800 rounded-lg shadow-lg px-4 py-2 border border-gray-300">
+//             Area: {area.toLocaleString()} m²
+//           </div>
+//         )}
+//       </MapGL>
+//     </div>
+//   );
+// }
+
+
+

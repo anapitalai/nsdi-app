@@ -145,3 +145,23 @@ export const insertReviewSchema = z.object({
     .min(1, 'Rating must be at least 1')
     .max(5, 'Rating must be at most 5'),
 });
+
+// LandMark Zod Schemas
+export const insertLandMarkSchema = z.object({
+  location_name: z.string().min(1, 'Location name is required'),
+  eastings: z.number(),
+  northings: z.number(),
+  eastings_error: z.number(),
+  northings_error: z.number(),
+  ellipsoidal_height: z.number(),
+  ellipsoidal_height_error: z.number(),
+  n_value: z.number(),
+  mean_sea_level: z.number(),
+  lat: z.number(),
+  lon: z.number(),
+  psm_type: z.string().min(1, 'PSM type is required'),
+});
+
+export const updateLandMarkSchema = insertLandMarkSchema.extend({
+  id: z.string().min(1, 'ID is required'),
+});

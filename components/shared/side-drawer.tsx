@@ -28,13 +28,8 @@ export default function SideDrawer() {
         </div>
         <ul className="mt-4 space-y-2 px-4">
           <li>
-            <Link href="/map" className="block px-3 py-2 rounded hover:bg-orange-50 text-gray-800 font-medium" onClick={() => setOpen(false)}>
+            <Link href="/satellite-map" className="block px-3 py-2 rounded hover:bg-orange-50 text-gray-800 font-medium" onClick={() => setOpen(false)}>
               🗺️ Map
-            </Link>
-          </li>
-          <li>
-            <Link href="/minio" className="block px-3 py-2 rounded hover:bg-orange-50 text-gray-800 font-medium" onClick={() => setOpen(false)}>
-              🗂️ MinIO Files
             </Link>
           </li>
         </ul>
