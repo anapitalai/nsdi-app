@@ -1,5 +1,5 @@
 import { getAllSpatials } from "@/lib/actions/spatial.actions";
-import SatelliteMapClient from "./SatelliteMapClient";
+import SatelliteMapClient from "@/components/shared/SatelliteMapClient";
 
 export default async function SatelliteMapPage() {
   const spatials = await getAllSpatials();
